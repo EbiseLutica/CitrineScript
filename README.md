@@ -96,6 +96,10 @@ print b // ERROR!
 // often used with if, for, while, loop statement
 if (a > 4):
     return "It's greater than 4"
+
+// You can make indentation using space, tab and '>'.
+if (a == 0):
+> return true
 ```
 
 ### Define functions
