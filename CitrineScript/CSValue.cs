@@ -43,6 +43,8 @@ namespace CitrineScript
             Type = type;
         }
 
+        public override string ToString() => NativeValue?.ToString();
+
         public static implicit operator CSValue(int value) => new CSValue(value);
         public static implicit operator CSValue(double value) => new CSValue(value);
         public static implicit operator CSValue(float value) => new CSValue(value);

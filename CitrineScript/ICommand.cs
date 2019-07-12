@@ -4,26 +4,26 @@ namespace CitrineScript
 {
     public interface ICommand
     {
-        CSValue Run(params CSValue[] args);
+        CSValue Run(CSCommandArgs cargs, params CSValue[] args);
     }
 
     public class NativeCommand : ICommand
     {
-        public NativeCommand(Func<CSValue[], CSValue> f)
+        public NativeCommand(Func<CSValue[], CSCommandArgs, CSValue> f)
         {
             func = f;
         }
-        public NativeCommand(Action<CSValue[]> action)
+        public NativeCommand(Action<CSValue[], CSCommandArgs> action)
         {
-            func = new Func<CSValue[], CSValue>(args => 
+            func = new Func<CSValue[], CSCommandArgs, CSValue>((args, cargs) => 
             {
-                action(args);
+                action(args, cargs);
                 return CSValue.Void;
             });
         }
 
-        public CSValue Run(params CSValue[] args) => func(args);
+        public CSValue Run(CSCommandArgs cargs, params CSValue[] args) => func(args, cargs);
 
-        private Func<CSValue[], CSValue> func;
+        private Func<CSValue[], CSCommandArgs, CSValue> func;
     }
 }
